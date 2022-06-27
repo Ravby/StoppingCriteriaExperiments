@@ -1,0 +1,83 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.7}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{verbatim}
+
+\begin{document}
+
+	\begin{tikzpicture}
+		
+		\begin{axis}[
+			ylabel=Fitness,
+			xmin=0,
+			width=7cm,height=6cm,
+			]
+			
+			\pgfplotstableread{@FOLDER_LOCATION/ABC_@PROBLEM_NAME.txt}\ABC
+			\pgfplotstableread{@FOLDER_LOCATION/JADE_@PROBLEM_NAME.txt}\JADE
+			\pgfplotstableread{@FOLDER_LOCATION/LaF_@PROBLEM_NAME.txt}\LaF
+			\pgfplotstableread{@FOLDER_LOCATION/TLBO_@PROBLEM_NAME.txt}\TLBO
+			\pgfplotstableread{@FOLDER_LOCATION/SOMA_ALL_TO_ALL_@PROBLEM_NAME.txt}\SOMA
+			\pgfplotstableread{@FOLDER_LOCATION/PSO_@PROBLEM_NAME.txt}\PSO
+			\pgfplotstableread{@FOLDER_LOCATION/HSA_@PROBLEM_NAME.txt}\HSA
+			\pgfplotstableread{@FOLDER_LOCATION/RW_@PROBLEM_NAME.txt}\RW
+			
+			\addplot[color=gray,mark=*, mark repeat=10, mark phase=1] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\ABC};
+
+			\addplot[color=yellow,mark=*, mark repeat=10, mark phase=2] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\JADE};
+			
+			\addplot[color=pink,mark=triangle*, mark repeat=10, mark phase=3] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\LaF};
+			
+			\addplot[color=cyan,mark=square*, mark repeat=10, mark phase=4] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\TLBO};
+			
+			\addplot[color=blue,mark=x, mark repeat=10, mark phase=5] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\SOMA};
+			
+			\addplot[color=green,mark=star, mark repeat=10, mark phase=6] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\PSO};
+			
+			\addplot[color=orange,mark=diamond*, mark repeat=10, mark phase=7] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\HSA};
+			
+			\addplot[color=purple,mark=pentagon*, mark repeat=10, mark phase=8] table
+			[
+			x expr=\thisrowno{0}, 
+			y expr=\thisrowno{1} 
+			] {\RW};
+								
+			
+		\end{axis}
+	\end{tikzpicture}
+
+\end{document}
